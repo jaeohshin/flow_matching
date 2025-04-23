@@ -4,6 +4,8 @@
 
 1. Download and unpack blurred ImageNet from the [official website](https://image-net.org/download.php).
 
+Downloading at /gpfs/jaeohshin/study/flow_matching/examples/image/data, April 23rd. evening
+
 ```
 export IMAGENET_DIR=~/flow_matching/examples/image/data/
 export IMAGENET_RES=64

@@ -7,7 +7,7 @@ from pathlib import Path
 
 import torch
 from training.distributed_mode import is_main_process
-
+import argparse
 
 def save_on_master(*args, **kwargs):
     if is_main_process():
@@ -51,6 +51,7 @@ def load_model(args, model_without_ddp, optimizer, loss_scaler, lr_schedule):
                 args.resume, map_location="cpu", check_hash=True
             )
         else:
+            torch.serialization.add_safe_globals([argparse.Namespace]) # Added this due to the pytorch version issue. May 1st 2025.
             checkpoint = torch.load(args.resume, map_location="cpu")
         model_without_ddp.load_state_dict(checkpoint["model"])
         print("Resume checkpoint %s" % args.resume)
